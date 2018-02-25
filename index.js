@@ -12,13 +12,14 @@ var PLUGIN_NAME = 'gulp-raml2html';
 var PluginError = gutil.PluginError;
 var File = gutil.File;
 
+
 function raml2html(filename, source, https, callback) {
   var cwd = process.cwd();
   var nwd = path.resolve(path.dirname(filename));
   process.chdir(nwd);
-  var config = raml2htmlLib.getDefaultConfig();
+  var config = raml2htmlLib.getConfigForTheme();
   config.https = https;
-  raml2htmlLib.render(source, config)
+  raml2htmlLib.render(filename, config)
     .then(function (html) {
       process.chdir(cwd);
       process.nextTick(function () {
@@ -75,8 +76,8 @@ function gulpRaml2html(options) {
     }
 
     if (file.isBuffer()) {
-      if (file.contents.slice(0, 11).toString('binary') === '#%RAML 0.8\n' ||
-        file.contents.slice(0, 12).toString('binary') === '#%RAML 0.8\r\n') {
+      if (file.contents.slice(0, 11).toString('binary') === '#%RAML 1.0\n' ||
+        file.contents.slice(0, 12).toString('binary') === '#%RAML 1.0\r\n') {
         return convertFile(file, file.contents, https, this, callback); // got RAML signature
       } else if (supportJsonInput) {
         var json = parseJSON(file.contents);

@@ -44,7 +44,7 @@ describe('gulp-raml2html', function() {
 
       raml2htmlInstance.write(new File({
         path: 'test.raml',
-        contents: new Buffer('#%RAML 0.8\ntitle: Example')
+        contents: new Buffer('#%RAML 1.0\ntitle: Example')
       }));
     });
 
@@ -58,7 +58,7 @@ describe('gulp-raml2html', function() {
 
       raml2htmlInstance.write(new File({
         path: 'error.raml',
-        contents: new Buffer('#%RAML 0.8\nfail')
+        contents: new Buffer('#%RAML 1.0\nfail')
       }));
     });
 
@@ -101,7 +101,7 @@ describe('gulp-raml2html', function() {
 
       raml2htmlInstance.write(new File({
         path: 'test.raml',
-        contents: new Buffer('#%RAML 0.8\ntitle: Example')
+        contents: new Buffer('#%RAML 1.0\ntitle: Example')
       }));
     });
 
