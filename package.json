@@ -2,17 +2,22 @@
   "name": "gulp-raml2html",
   "version": "0.3.0",
   "description": "A simple RAML to HTML documentation generator.",
-  "contributors": [{
-    "name": "Bjarke Walling",
-    "email": "bwp@bwp.dk"
-  }, {
-    "name": "Tomasz Ducin",
-    "email": "tomasz@ducin.it"
-  }, {
-    "name": "Nicolas Lagier"
-  }, {
-    "name": "Jan Killian"
-  }],
+  "contributors": [
+    {
+      "name": "Bjarke Walling",
+      "email": "bwp@bwp.dk"
+    },
+    {
+      "name": "Tomasz Ducin",
+      "email": "tomasz@ducin.it"
+    },
+    {
+      "name": "Nicolas Lagier"
+    },
+    {
+      "name": "Jan Killian"
+    }
+  ],
   "scripts": {
     "test": "node test"
   },
@@ -41,6 +46,7 @@
   ],
   "dependencies": {
     "gulp-util": "^3.0.7",
+    "raml-1-parser": "^1.1.40",
     "raml2html": "^7.0.0",
     "through2": "^2.0.1"
   },

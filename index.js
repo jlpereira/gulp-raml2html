@@ -6,6 +6,7 @@ var through2 = require('through2');
 var gutil = require('gulp-util');
 var util = require('util');
 var path = require('path');
+var raml = require('raml-1-parser');
 
 var PLUGIN_NAME = 'gulp-raml2html';
 
@@ -19,7 +20,7 @@ function raml2html(filename, source, https, callback) {
   process.chdir(nwd);
   var config = raml2htmlLib.getConfigForTheme();
   config.https = https;
-  raml2htmlLib.render(filename, config)
+  raml2htmlLib.render(source, config)
     .then(function (html) {
       process.chdir(cwd);
       process.nextTick(function () {
@@ -78,7 +79,13 @@ function gulpRaml2html(options) {
     if (file.isBuffer()) {
       if (file.contents.slice(0, 11).toString('binary') === '#%RAML 1.0\n' ||
         file.contents.slice(0, 12).toString('binary') === '#%RAML 1.0\r\n') {
-        return convertFile(file, file.contents, https, this, callback); // got RAML signature
+          var api = raml.loadSync('' + file.contents);
+          if(api.errors.length) {
+            return this.emit('error', new PluginError(PLUGIN_NAME, "Parse error while validating:" + JSON.stringify(api.errors)));
+          }
+          else {
+            return convertFile(file, api.specification, https, this, callback);
+          }
       } else if (supportJsonInput) {
         var json = parseJSON(file.contents);
         if (json) {

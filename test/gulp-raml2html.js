@@ -52,7 +52,7 @@ describe('gulp-raml2html', function() {
       var raml2htmlInstance = raml2html();
 
       raml2htmlInstance.once('error', function(error) {
-        error.message.should.equal('error.raml:2:1: Parse error while validating root: document must be a map');
+        error.message.should.match(/Parse error while validating/);
         done();
       });
 
@@ -117,7 +117,7 @@ describe('gulp-raml2html', function() {
       });
 
       var bigRamlDoc =
-        '#%RAML 0.8\n' +
+        '#%RAML 1.0\n' +
         'title: Example\n' +
         'documentation:\n' +
         '  - title: Test\n' +

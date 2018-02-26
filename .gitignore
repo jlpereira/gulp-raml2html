@@ -41,3 +41,6 @@ jspm_packages
 
 # Visual studio code things
 .vscode
+
+#Mac
+.DS_Store
